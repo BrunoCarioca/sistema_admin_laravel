@@ -231,12 +231,14 @@ return [
             'icon'    => ' fas fa-solid fa-user',
             'submenu' => [
                 [
-                    'text' => 'Listar Usuários',
-                    'url'  => '#',
+                    'text'  => 'Lista de Usuários',
+                    'route' => 'usuarios.index',
+                    'icon'    => ' fas fa-solid fa-list',
                 ],
                 [
-                    'text' => 'Cadastrar Usuários',
-                    'url'  => '#',
+                    'text' => 'Novo Usuário',
+                    'route'  => 'usuarios.create',
+                    'icon'    => ' fas fa-solid fa-file',
                 ],
             ],
         ],
