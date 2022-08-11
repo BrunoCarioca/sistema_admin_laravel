@@ -1,9 +1,31 @@
 version: "3"
 
 services:
-    myapp:
-        image: docker.io/bitnami/laravel:9
-        ports:
-            - "8000:8000"
+    app:
+        build:
+            args:
+                user: ${DOCKER_USER}
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile
+        image: laravel-tcc
+        container_name: sistema_admin_laravel
+        tty: true
+        restart: unless-stopped
+        working_dir: /var/www/
         volumes:
-            - ".:/app"
+            - ./:/var/www
+    nginx:
+        image: nginx:alpine
+        container_name: sistema_admin_laravel-nginx
+        restart: unless-stopped
+        ports:
+            - 8000:80
+        volumes:
+            - ./:/var/www
+            - ./docker-compose/nginx:/etc/nginx/conf.d/
+
+networks:
+    default:
+        name: projeto-tcc
+        external: true
